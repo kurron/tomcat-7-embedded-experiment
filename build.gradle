@@ -28,6 +28,7 @@
 
 apply plugin: 'groovy'
 apply plugin: 'project-report'
+apply plugin: 'war'
 apply plugin: 'application'
 
 ext {
@@ -91,6 +92,12 @@ dependencies {
 mainClassName = "org.kurron.tomcat.embed.Launcher"
 applicationDistribution.from('src/main/webapp') {
     into 'src/main/webapp'
+}
+
+war {
+    classpath = classpath.filter { file ->
+        !file.name.startsWith('tomcat') && !file.name.startsWith('ecj')
+    }
 }
 
 task generateWrapper(type: Wrapper) {
