@@ -18,9 +18,12 @@
 
 
 
+
+
 apply plugin: 'groovy'
 apply plugin: 'project-report'
 apply plugin: 'war'
+apply plugin: 'application'
 
 ext {
     groovyVersion = '2.1.3'
@@ -32,7 +35,7 @@ ext {
     tomcatVersion = '7.0.40'
 }
 
-defaultTasks 'clean', 'projectReport', 'build'
+defaultTasks 'clean', 'projectReport', 'build', 'startScripts', 'installApp', 'distZip', 'distTar'
 
 repositories {
     mavenCentral()
@@ -79,6 +82,8 @@ dependencies {
         exclude module: 'hamcrest-core'
     }
 }
+
+mainClassName = "org.kurron.tomcat.embed.Launcher"
 
 task generateWrapper(type: Wrapper) {
     gradleVersion = '1.6'
