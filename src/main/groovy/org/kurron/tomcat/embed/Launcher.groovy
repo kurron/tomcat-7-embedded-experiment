@@ -14,6 +14,8 @@
  *    limitations under the License.
  */
 
+
+
 package org.kurron.tomcat.embed
 
 import org.apache.catalina.startup.Tomcat
@@ -27,7 +29,7 @@ class Launcher {
         Tomcat tomcat = new Tomcat()
         tomcat.port = 8080
         tomcat.addWebapp('/', new File(location).getAbsolutePath())
-        String path = new File("./" + location).getAbsolutePath()
+        String path = new File(location).getAbsolutePath()
         println "configuring app with basedir: ${path}"
         tomcat.start()
         tomcat.getServer().await()
