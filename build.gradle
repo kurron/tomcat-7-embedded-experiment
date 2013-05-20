@@ -16,8 +16,11 @@
 
 
 
+
+
 apply plugin: 'groovy'
 apply plugin: 'project-report'
+apply plugin: 'war'
 
 ext {
     groovyVersion = '2.1.3'
