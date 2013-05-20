@@ -1,0 +1,57 @@
+apply plugin: 'groovy'
+apply plugin: 'project-report'
+
+ext {
+    groovyVersion = '2.1.3'
+    hamcrestVersion =  '1.3'
+    junitVersion = '4.10'
+    logbackVersion = '1.0.12'
+    slf4jVersion = '1.7.5'
+    spockVersion = '0.7-groovy-2.0'
+    tomcatVersion = '7.0.40'
+}
+
+defaultTasks 'clean', 'projectReport', 'build'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repo.springsource.org/libs-release"
+    }
+    maven {
+        url "http://repo.springsource.org/libs-milestone"
+    }
+    maven {
+        url "http://repo.springsource.org/libs-snapshot"
+    }
+}
+
+configurations {
+    all*.exclude group: 'commons-logging'
+    all*.exclude group: 'log4j'
+    all*.exclude group: 'slf4j'
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}:indy"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:slf4j-ext:${slf4jVersion}"
+    compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    compile "ch.qos.logback:logback-core:${logbackVersion}"
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+
+    runtime "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+    runtime "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+
+    testCompile ( "junit:junit-dep:${junitVersion}" ) {
+            exclude module: 'hamcrest-core'
+    }
+    testCompile "org.hamcrest:hamcrest-all:${hamcrestVersion}"
+    testCompile ( "org.spockframework:spock-core:${spockVersion}" ) {
+            exclude module: 'groovy-all'
+    }
+}
+
+task generateWrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
