@@ -24,9 +24,10 @@
 
 
 
+
+
 apply plugin: 'groovy'
 apply plugin: 'project-report'
-apply plugin: 'war'
 apply plugin: 'application'
 
 ext {
