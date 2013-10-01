@@ -28,9 +28,9 @@ class Launcher {
         String location = 'src/main/webapp/'
         Tomcat tomcat = new Tomcat()
         tomcat.port = 8080
-        tomcat.addWebapp('/', new File(location).getAbsolutePath())
         String path = new File(location).getAbsolutePath()
         println "configuring app with basedir: ${path}"
+        tomcat.addWebapp('/', path)
         tomcat.start()
         tomcat.getServer().await()
     }
