@@ -85,5 +85,5 @@ war {
 }
 
 task generateWrapper(type: Wrapper) {
-    gradleVersion = '1.7'
+    gradleVersion = '1.8'
 }
