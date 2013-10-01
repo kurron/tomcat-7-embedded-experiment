@@ -22,6 +22,9 @@ import org.apache.catalina.startup.Tomcat
 import org.apache.commons.cli.CommandLine
 import org.apache.commons.cli.CommandLineParser
 import org.apache.commons.cli.GnuParser
+import org.apache.commons.cli.HelpFormatter
+import org.apache.commons.cli.Option
+import org.apache.commons.cli.OptionBuilder
 import org.apache.commons.cli.Options
 
 /**
@@ -29,19 +32,34 @@ import org.apache.commons.cli.Options
  */
 class Launcher {
     public static void main(String[] args) {
+
         Options options = new Options()
+        options.addOption( 'h', 'help', false, 'print this message' )
         options.addOption( 'p', 'port', true, 'port the application should bind to' )
+        Option property  = OptionBuilder.withArgName( 'property=value' )
+                                        .hasArgs(2)
+                                        .withValueSeparator()
+                                        .withDescription( 'use value for given property' )
+                                        .create( 'D' )
+        options.addOption( property )
+
         CommandLineParser parser = new GnuParser()
         CommandLine line = parser.parse( options, args )
 
         Tomcat tomcat = new Tomcat()
 
+        if( line.hasOption( 'help' ) ) {
+            HelpFormatter formatter = new HelpFormatter()
+            formatter.printHelp( 'tomcat-7-embedded-experiment', options, true )
+            System.exit( 0 )
+        }
+
         if( line.hasOption( 'port' ) ) {
             tomcat.port = Integer.parseInt( line.getOptionValue( 'port' ) )
         }
-        else {
-            println( 'No port specified' )
-        }
+
+        // this has to be set in the DEFAULT_JVM_OPTS variable in the start script
+        println( "foo=${System.getProperty( 'foo', 'default value')}" )
 
         String location = 'src/main/webapp/'
         String path = new File(location).getAbsolutePath()
