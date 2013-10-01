@@ -30,7 +30,6 @@
     <orderEntry type="library" exported="" scope="RUNTIME" name="jul-to-slf4j-1.7.5" level="project" />
     <orderEntry type="library" exported="" name="logback-core-1.0.12" level="project" />
     <orderEntry type="library" exported="" name="tomcat-jsp-api-7.0.42" level="project" />
-    <orderEntry type="library" exported="" name="groovy-all-2.1.6" level="project" />
     <orderEntry type="library" exported="" name="tomcat-juli-7.0.42" level="project" />
     <orderEntry type="library" exported="" name="logback-classic-1.0.12" level="project" />
     <orderEntry type="library" exported="" name="tomcat-jasper-7.0.42" level="project" />
@@ -38,6 +37,7 @@
     <orderEntry type="library" exported="" scope="RUNTIME" name="log4j-over-slf4j-1.7.5" level="project" />
     <orderEntry type="library" scope="TEST" name="spock-core-0.7-groovy-2.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-ext-1.7.5" level="project" />
+    <orderEntry type="library" exported="" name="groovy-all-2.1.7" level="project" />
   </component>
 </module>
 
