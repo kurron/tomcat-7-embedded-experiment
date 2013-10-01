@@ -19,15 +19,31 @@
 package org.kurron.tomcat.embed
 
 import org.apache.catalina.startup.Tomcat
+import org.apache.commons.cli.CommandLine
+import org.apache.commons.cli.CommandLineParser
+import org.apache.commons.cli.GnuParser
+import org.apache.commons.cli.Options
 
 /**
  * Configures and launches the embedded Tomcat 7 container.
  */
 class Launcher {
     public static void main(String[] args) {
-        String location = 'src/main/webapp/'
+        Options options = new Options()
+        options.addOption( 'p', 'port', true, 'port the application should bind to' )
+        CommandLineParser parser = new GnuParser()
+        CommandLine line = parser.parse( options, args )
+
         Tomcat tomcat = new Tomcat()
-        tomcat.port = 8080
+
+        if( line.hasOption( 'port' ) ) {
+            tomcat.port = Integer.parseInt( line.getOptionValue( 'port' ) )
+        }
+        else {
+            println( 'No port specified' )
+        }
+
+        String location = 'src/main/webapp/'
         String path = new File(location).getAbsolutePath()
         println "configuring app with basedir: ${path}"
         tomcat.addWebapp('/', path)
