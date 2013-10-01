@@ -75,11 +75,13 @@ dependencies {
     testCompile "org.spockframework:spock-core:${spockVersion}"
 }
 
+applicationName = 'embedded'
 mainClassName = "org.kurron.tomcat.embed.Launcher"
 applicationDistribution.from('src/main/webapp') {
     into 'src/main/webapp'
 }
-
+// this gets put into the DEFAULT_JVM_OPTS variable
+applicationDefaultJvmArgs = ['-Dfoo=logan']
 war {
     classpath = classpath.filter { file ->
         !file.name.startsWith('tomcat') && !file.name.startsWith('ecj')
